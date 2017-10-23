@@ -5,6 +5,7 @@
 <!--这块等于dao接口的实现 namespace必须和接口的类路径一样-->
 <mapper namespace="cn.gyliangTest.dao.UserMapper">
     <!-- findByName 和  inserUser必须和接口中的方法名一样 返回一个User 就是刚才的别名 如果不弄别名要连类路径一起写-->
+
     <select id="findByName" parameterType="HashMap" resultType="Users">
         select * from users where name=#{name}
     </select>
@@ -16,6 +17,17 @@
         #{name,jdbcType=VARCHAR},
         #{age,jdbcType=SMALLINT}
         )
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO users(name,age)
+                VALUES
+                    <foreach collection="list" item="item" index="" separator=",">
+                        (
+                        #{item.name,jdbcType=VARCHAR},
+                        #{item.age,jdbcType=SMALLINT}
+                        )
+                    </foreach>
     </insert>
 
 </mapper>

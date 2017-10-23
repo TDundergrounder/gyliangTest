@@ -1,9 +1,21 @@
 package cn.gyliangTest.User;
 
+import java.util.List;
+
 public class Users {
     private String name;
     private Integer age;
     private Integer id;
+
+    public List<Users> getUsersList() {
+        return usersList;
+    }
+
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
+    }
+
+    private List<Users> usersList;
 
     public String getName() {
         return name;

@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 * mybatis测试
@@ -55,6 +57,22 @@ public class MyBatisTest {
         user1.setName("lianggy005");
         user1.setAge(22);
         userMapper.insertUser(user1);
+
+        //test batchInsert
+        List<Users> usersArrayList = new ArrayList<Users>();
+
+        String[] names = new String[]{"lianggy006","lianggy007","lianggy008"};
+        int[] ages = new int[]{25,26,27};
+        for(int i=0;i<names.length;i++){
+            Users u = new Users();
+            String s = names[i];
+            u.setName(s);
+            int a = ages[i];
+            u.setAge(a);
+            usersArrayList.add(u);
+        }
+
+        userMapper.batchInsert(usersArrayList);
         //it is a must or no data will be insert into server.
         sqlSession.commit();
 
